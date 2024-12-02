@@ -18,6 +18,12 @@ public class NEWGunSystem : MonoBehaviour
     public RaycastHit rayHit;
     public LayerMask whatIsEnemy;
 
+    private void Awake()
+    {
+        bulletsLeft = magazineSize;
+        readyToShoot = true;
+    }
+
     private void Update()
     {
         MyInput();
@@ -34,6 +40,7 @@ public class NEWGunSystem : MonoBehaviour
         //Shoot
         if(readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
+            bulletsShot = bulletsPerTap;
             Shoot();
         }
     }
