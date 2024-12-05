@@ -35,7 +35,7 @@ public class NEWProjectileScript : MonoBehaviour
         if(collisions > maxCollisions) Explode();
 
         //Count down lifetime
-        maxLifetime = -Time.deltaTime;
+        maxLifetime -= Time.deltaTime;
         if(maxLifetime <= 0) Explode();
     }
 
