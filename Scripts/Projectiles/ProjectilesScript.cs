@@ -15,6 +15,7 @@ public class NEWProjectileScript : MonoBehaviour
     //Damage
     public int explosionDamage;
     public float explosionRange;
+    public float explosionForce;
 
     //Lifetime
     public int maxCollisions;
@@ -36,7 +37,10 @@ public class NEWProjectileScript : MonoBehaviour
 
         //Count down lifetime
         maxLifetime -= Time.deltaTime;
-        if(maxLifetime <= 0) Explode();
+        if(maxLifetime <= 0)
+        {          
+            Explode();
+        }
     }
 
     private void Explode()
@@ -52,6 +56,10 @@ public class NEWProjectileScript : MonoBehaviour
 
             //Example!!!!
             enemies[i].GetComponent<EnemyHealthController>().DamageEnemy(explosionDamage);
+
+            //Add explosion force (if enemy a rigidbody)
+            if (enemies[i].GetComponent<Rigidbody>())
+                enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
         }
 
         //add a little delay, just to make sure everything works fine
