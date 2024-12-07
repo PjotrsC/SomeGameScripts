@@ -30,6 +30,12 @@ public class NEWPickupController : MonoBehaviour
         equipped = true;
         slotFull = true;
 
+        //Make weapon a child of the camera and move it to default position
+        transform.SetParent(gunContainer); // Be !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
+        transform.localScale = Vector3.one;
+
         //Make Rigidbody kinematic and BoxCollider a trigger
         rb.isKinematic = true;
         coll.isTrigger = true;
@@ -42,9 +48,23 @@ public class NEWPickupController : MonoBehaviour
         equipped = false;
         slotFull = false;
 
+        //Set parent to null
+        transform.SetParent(null);
+
         //Make Rigidbody not kinematic and BoxCollider normal
         rb.isKinematic = false;
         coll.isTrigger = false;
+
+        //Gun carries momentum of player
+        rb.velocity = player.GetComponent<Rigidbody>().velocity;
+
+        //AddForce
+        rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
+        rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
+
+        //Add random rotation
+        float random = Random.Range(-1f, 1f);
+        rb.AddTorque(new Vector3(random, random, random) * 10);
 
         //disable script
         gunScript.enabled = false;
