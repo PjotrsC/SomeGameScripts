@@ -27,10 +27,26 @@ public class NEWPickupController : MonoBehaviour
 
     private void PickUp()
     {
+        equipped = true;
+        slotFull = true;
 
+        //Make Rigidbody kinematic and BoxCollider a trigger
+        rb.isKinematic = true;
+        coll.isTrigger = true;
+
+        //Enable script
+        gunScript.enabled = true;
     }
     private void Drop()
     {
+        equipped = false;
+        slotFull = false;
 
+        //Make Rigidbody not kinematic and BoxCollider normal
+        rb.isKinematic = false;
+        coll.isTrigger = false;
+
+        //disable script
+        gunScript.enabled = false;
     }
 }
