@@ -9,6 +9,8 @@ public class NEWPickupController : MonoBehaviour
     public BoxCollider coll;
     public Transform player, gunContainer, fpsCam;
 
+    public float RotationSpeed;
+
     public float pickUpRange;
     public float dropForwardForce, dropUpwardForce;
 
@@ -76,13 +78,17 @@ public class NEWPickupController : MonoBehaviour
         //Gun carries momentum of player
         rb.velocity = player.GetComponent<Rigidbody>().velocity;
 
+        /*Vector3 playerVelocity = player.GetComponent<Rigidbody>().velocity;
+        playerVelocity *= 0.5f; // Уменьшение скорости
+        rb.velocity = playerVelocity;*/
+
         //AddForce
         rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
         rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
 
         //Add random rotation
         float random = Random.Range(-1f, 1f);
-        rb.AddTorque(new Vector3(random, random, random) * 10);
+        rb.AddTorque(new Vector3(random, random, random) * RotationSpeed);
 
         //disable script
         gunScript.enabled = false;
