@@ -15,6 +15,24 @@ public class NEWPickupController : MonoBehaviour
     public bool equipped;
     public static bool slotFull;
 
+    private void Start()
+    {
+        //Setup
+        if (!equipped)
+        {
+            gunScript.enabled = false;
+            rb.isKinematic = false;
+            coll.isTrigger = false;
+        }
+        if (equipped)
+        {
+            gunScript.enabled = true;
+            rb.isKinematic = true;
+            coll.isTrigger = true;
+            slotFull = true;
+        }
+    }
+
     private void Update()
     {
         //Check if player is in range and "E" is pressed
