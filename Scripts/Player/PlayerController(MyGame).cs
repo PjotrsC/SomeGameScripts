@@ -28,12 +28,13 @@ public class PlayerController : MonoBehaviour
     [Header("Weapon Holder")]
     [SerializeField] private WeaponSwitching weaponSwitching;
 
+    #region Gizmos if needed remove
     [Header("Gizmos")]
     [SerializeField] private bool gizmo_cameraRay = false;
     [SerializeField] private bool gizmo_ground = false;
     [SerializeField] private bool gizmo_target = false;
     [SerializeField] private bool gizmo_ignoredHeightTarget = false;
-
+    #endregion
 
     private void Awake()
     {
@@ -171,8 +172,9 @@ public class PlayerController : MonoBehaviour
     private void Fly()      //TODO!!! in state!
     {
         {
-            moveInput.x *= airSpeedControll;
-            moveInput.z *= airSpeedControll;
+            Vector3 Fly = new Vector3(moveInput.x * airSpeedControll, moveInput.y * airSpeedControll, moveInput.z * airSpeedControll);
+            //moveInput.x *= airSpeedControll;
+            //moveInput.z *= airSpeedControll;
         }
     }
 
